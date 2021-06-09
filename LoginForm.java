@@ -146,21 +146,35 @@ public class LoginForm extends JFrame {
 				// check if the fields are empty
 				if (username.trim().equals("") || password.trim().equals("")) {
 
-					JOptionPane.showMessageDialog(null, "Enter The Username & Password","Empy Fields", 2);
-				}else {
-					
+					JOptionPane.showMessageDialog(null, "Enter The Username & Password", "Empy Fields", 2);
+				} else {
+
 					try {
+
+						// get the connection from class DB
 						ps = DB.getConnection().prepareStatement(query);
 						ps.setString(1, username);
 						ps.setString(2, password);
-						
+
 						rs = ps.executeQuery();
-						
-						if(rs.next()) {
-							System.out.println("YES");
-						}else {
-							System.out.println("ça marche pas");
+
+						// chech if the user exists
+
+						// if the user exists
+						if (rs.next()) {
+							
+							DashboardForm dash_f= new DashboardForm();
+							dash_f.setVisible(true);
+							dispose();
+
+							//close the login form
+							// if not
+						} else {
+							
+							JOptionPane.showMessageDialog(null, "Invalid Username Or Password", "Wrong Data", 0);
+							
 						}
+						
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -201,4 +215,3 @@ public class LoginForm extends JFrame {
 	}
 
 }
-
