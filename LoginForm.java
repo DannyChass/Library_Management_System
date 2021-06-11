@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import My_Classes.DB;
+import My_Classes.Func_Class;
 
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -41,6 +42,8 @@ public class LoginForm extends JFrame {
 	private JButton jButton_Login;
 	private JLabel JLabel_Logo;
 
+	Func_Class func = new Func_Class();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -188,7 +191,8 @@ public class LoginForm extends JFrame {
 		// center the position
 		this.setLocationRelativeTo(null);
 
-		displayImage();
+		
+		func.displayImage(JLabel_Logo.getWidth(), JLabel_Logo.getHeight(),"/My_Images/book_login_logo.png",JLabel_Logo);
 
 	}
 

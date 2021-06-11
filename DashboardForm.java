@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import My_Classes.Func_Class;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -34,6 +36,9 @@ public class DashboardForm extends JFrame {
 	// the button border
 	Border buttonBorder1 = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white);
 	Border buttonBorder0 = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.DARK_GRAY);
+	
+	
+	Func_Class func = new Func_Class();
 
 	/**
 	 * Launch the application.
@@ -132,8 +137,6 @@ public class DashboardForm extends JFrame {
 		JPanel_3_Header.add(lblNewLabel_3);
 
 		this.setLocationRelativeTo(null);
-
-		displayImage();
 
 		// add a border
 		Border panelHeaderBorder = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white);
@@ -271,19 +274,10 @@ public class DashboardForm extends JFrame {
 		JPanel_1_1.add(lblNewLabel_4_2);
 
 		buttonsHoverEffect();
+		
+		//diplay the logo
+		func.displayImage(JLabel_Dashboard_Logo.getWidth(),  JLabel_Dashboard_Logo.getHeight(),"/My_Images/book_dash_logo.png", JLabel_Dashboard_Logo);
 
-	}
-
-	public void displayImage() {
-		// get the image
-		ImageIcon imgIco = new ImageIcon(getClass().getResource("/My_Images/book_dash_logo.png"));
-
-		// make the image fit the JLabel
-		Image image = imgIco.getImage().getScaledInstance(JLabel_Dashboard_Logo.getWidth(),
-				JLabel_Dashboard_Logo.getHeight(), Image.SCALE_SMOOTH);
-
-		// set the image int the JLabel
-		JLabel_Dashboard_Logo.setIcon(new ImageIcon(image));
 	}
 
 	// create a fonction to add hover effect on the menu
