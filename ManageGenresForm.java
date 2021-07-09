@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import My_Classes.DB;
 import My_Classes.Func_Class;
 import My_Classes.Genre;
 
@@ -23,18 +24,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.ListSelectionModel;
 
 public class ManageGenresForm extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField jtextField_ID;
+	public  JTextField jTextField_ID = new JTextField();
 	private JTextField jTextField_Name;
 	private JTable jTable_Genres;
+	private JLabel jLabel_EmptyName = new JLabel("* enter the genre name");
+	Genre genre = new Genre();
 
 	/**
 	 * Launch the application.
@@ -123,10 +133,9 @@ public class ManageGenresForm extends JFrame {
 		lblName.setBounds(41, 175, 71, 37);
 		panel.add(lblName);
 		
-		jtextField_ID = new JTextField();
-		jtextField_ID.setBounds(122, 132, 132, 27);
-		panel.add(jtextField_ID);
-		jtextField_ID.setColumns(10);
+		jTextField_ID.setBounds(122, 132, 132, 27);
+		panel.add(jTextField_ID);
+		jTextField_ID.setColumns(10);
 		
 		jTextField_Name = new JTextField();
 		jTextField_Name.setBounds(122, 180, 180, 27);
@@ -145,12 +154,13 @@ public class ManageGenresForm extends JFrame {
 				//check is the textfield is empty
 				if(name.isEmpty()) {
 					
-					
+					jLabel_EmptyName.setVisible(true);
 					
 				}else {
 					
-					Genre genre = new Genre();
 					genre.addGenre(name);
+					//refresh the JTable with Genres
+					populateJtableWithGenres();
 				}
 			}
 			
@@ -159,24 +169,110 @@ public class ManageGenresForm extends JFrame {
 		JButton jButton_Edit = new JButton("Edit");
 		jButton_Edit.setBounds(140, 250, 120, 27);
 		panel.add(jButton_Edit);
+		jButton_Edit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				String name = jTextField_Name.getText();
+				
+				if(name.isEmpty()) {
+					
+					jLabel_EmptyName.setVisible(true);
+					
+				}else {
+					
+					try {
+						int id = Integer.valueOf(jTextField_ID.getText());
+						genre.editGenre(id, name);
+						populateJtableWithGenres();
+						
+					}catch(NumberFormatException ex) {
+						
+						JOptionPane.showMessageDialog(null, "Invalid Genre ID", "error",0);
+					}
+				}
+				
+			}
+		});
+		
 		
 		JButton jButton_Delete = new JButton("Delete");
 		jButton_Delete.setBounds(270, 250, 120, 27);
 		panel.add(jButton_Delete);
-		
+		jButton_Delete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//delete the selected genre
+				
+				try {
+					
+					int id = Integer.parseInt(jTextField_ID.getText());
+					genre.removeGenre(id);
+					populateJtableWithGenres();
+					
+				}catch(NumberFormatException ex) {
+					
+					JOptionPane.showMessageDialog(null, "Invalid Genre ID - " + ex.getMessage(), "error",0);
+				}
+				
+			}
+			
+			
+		});
 		jTable_Genres = new JTable();
+		jTable_Genres.setSelectionBackground(new Color(249,105,14));
+		jTable_Genres.setSelectionForeground(Color.white);
+		jTable_Genres.setRowHeight(30);
+		jTable_Genres.setShowGrid(false);
+		jTable_Genres.setBackground(new Color(248,248,248));
+		
+		
+		//customize the jtable header show
+		
+		
+		jTable_Genres.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				//display the selected genre
+				// get the selected row index
+				int index = jTable_Genres.getSelectedRow();
+				
+				//get values
+				String id = jTable_Genres.getValueAt(index, 0).toString();
+				String name = jTable_Genres.getValueAt(index, 1).toString();
+				
+				// show data in the TextFields
+				jTextField_ID.setText(id);
+				jTextField_Name.setText(name);
+			}
+			
+			
+			
+		});
 		jTable_Genres.setColumnSelectionAllowed(true);
 		jTable_Genres.setToolTipText("");
-		jTable_Genres.setBorder(null);
 		jTable_Genres.setCellSelectionEnabled(true);
 		jTable_Genres.setForeground(new Color(0, 0, 0));
 		jTable_Genres.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"Title1", "Title 2", "Title 3", "Title 4"},
-				{"test", "a", "b", "c"},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
 			},
 			new String[] {
-				"Title1", "Title 2", "Title 3", "Title 4"
+				"ID", "NAME"
 			}
 		));
 		jTable_Genres.setBounds(417, 104, 250, 173);
@@ -186,7 +282,65 @@ public class ManageGenresForm extends JFrame {
 		jTable_Genres.setSelectionBackground(Color.LIGHT_GRAY);
 		jTable_Genres.setShowGrid(true);
 		jTable_Genres.setBackground(new Color(248,248,248));
+		jLabel_EmptyName.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				//hide the jlabel on click
+				
+				jLabel_EmptyName.setVisible(false);
+				
+				
+			}
+		});
+		
+		
+		jLabel_EmptyName.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		jLabel_EmptyName.setForeground(new Color(204, 0, 0));
+		jLabel_EmptyName.setBounds(122, 213, 180, 26);
+		panel.add(jLabel_EmptyName);
+		
+		jLabel_EmptyName.setVisible(false);
+		
+		
 		jTable_Genres.getTableHeader().setForeground(Color.white);
 		jTable_Genres.getTableHeader().setOpaque(false);
+		
+		
+		// populate JTable 
+		populateJtableWithGenres();
+		
+	}
+	
+	//create a function to populate the jtable with genres
+	public void populateJtableWithGenres() {
+
+		
+		
+		ArrayList<Genre> genresList = genre.genreList();
+		
+		//jTables columns
+		
+		String[] colNames = {"ID","NAME"};
+		
+		// row
+		Object [][] rows = new Object[genresList.size()][colNames.length];
+		
+		for(int i = 0; i<genresList.size(); i++) {
+			
+			rows[i][0]= genresList.get(i).getId();
+			
+			rows[i][1]=genresList.get(i).getName();
+			
+		}
+		
+		DefaultTableModel model = new DefaultTableModel(rows,colNames);
+		jTable_Genres.setModel(model);
+		
+	}
+	
+	public void setTextInTheFields(String id, String name) {
+		jTextField_ID.setText(id);
+		jTextField_Name.setText(name);
 	}
 }
