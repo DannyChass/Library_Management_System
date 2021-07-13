@@ -146,4 +146,28 @@ public class Member {
 		
 	}
 
+	//get member by id
+	public Member getMemberById(Integer id)
+	{
+		Func_Class func = new Func_Class();
+		
+		String query = "SELECT * FROM members WHERE id = "+id;
+		
+		ResultSet rs = func.getData(query);
+	
+		
+		try {
+			if(rs.next())
+			{
+				return new Member(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),rs.getBytes(7));
+			}
+			else
+			{
+				return null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

@@ -139,7 +139,7 @@ public class AddMemberForm extends JFrame {
 		panel.setBorder(panelHeaderBorder);
 
 		Func_Class func = new Func_Class();
-		func.displayImage(90, 60, "/My_Images/members.png", jLabel_FromTitle);
+		func.displayImage(90, 60,null, "/My_Images/members.png", jLabel_FromTitle);
 
 		JLabel jLabel_FirstName = new JLabel("First Name:");
 		jLabel_FirstName.setFont(new Font("Verdana", Font.PLAIN, 14));
