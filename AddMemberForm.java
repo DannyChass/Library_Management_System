@@ -1,6 +1,6 @@
 package My_Forms;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.BorderFactory;
@@ -11,15 +11,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import My_Classes.Member;
-import My_Classes.DB;
 import My_Classes.Func_Class;
 
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import java.awt.Component;
-import java.awt.Rectangle;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,19 +27,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.ListSelectionModel;
-import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.DefaultComboBoxModel;
@@ -156,8 +143,16 @@ public class AddMemberForm extends JFrame {
 		panel.add(jButton_Add);
 		jButton_Add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				// add a new genre
+				
+				// add a new member
+				
+				//hide the jlabels "empty message"
+				
+				jLabel_EmptyFirstName.setVisible(false);
+				jLabel_EmptyLastName.setVisible(false);
+				jLabel_EmptyPhone.setVisible(false);
+				
+				//get the member data 
 				String fname = jTextField_FirstName.getText();
 				String lname = jTextField_LastName.getText();
 				String phone = jTextField_PhoneNumber.getText();

@@ -134,7 +134,7 @@ public class DeleteMemberForm extends JFrame {
 		panel.setBorder(panelHeaderBorder);
 
 		Func_Class func = new Func_Class();
-		func.displayImage(90, 60,null, "/My_Images/members.png", jLabel_FromTitle);
+		func.displayImage(90, 60, null, "/My_Images/members.png", jLabel_FromTitle);
 
 		JLabel jLabel_FirstName = new JLabel("Enter The ID:");
 		jLabel_FirstName.setFont(new Font("Verdana", Font.PLAIN, 14));
@@ -149,25 +149,28 @@ public class DeleteMemberForm extends JFrame {
 		JButton jButton_Delete = new JButton("Delete Member");
 		jButton_Delete.setBounds(10, 186, 434, 27);
 		panel.add(jButton_Delete);
-		
-		
+
 		jButton_Delete.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
 
 				// delete a member
-				
-				try 
-				{
+
+				try {
 					Integer id = Integer.parseInt(jTextField_ID.getText());
-					
-					
-					//show a confirmation message before deleting
-					int confirm = JOptionPane.showConfirmDialog(null, "Are You Sure Yoy Want To Delete This Member?","Confirmation Box",JOptionPane.YES_NO_OPTION);
-					member.removeMember(id);
-					
-				}catch(Exception ex) 
-				{
+
+					// show a confirmation message before deleting
+					int confirm = JOptionPane.showConfirmDialog(null, "Are You Sure Yoy Want To Delete This Member?",
+							"Confirmation Box", JOptionPane.YES_NO_OPTION);
+					if(confirm == JOptionPane.YES_OPTION)
+					{
+						member.removeMember(id);
+					}else 
+					{
+						System.out.println("Cancel");
+					}
+
+				} catch (Exception ex) {
 					jLabel_EmptyID.setForeground(Color.red);
 				}
 
@@ -189,7 +192,7 @@ public class DeleteMemberForm extends JFrame {
 		jLabel_EmptyID.setForeground(new Color(204, 0, 0));
 		jLabel_EmptyID.setBounds(109, 141, 222, 20);
 		panel.add(jLabel_EmptyID);
-		
+
 		jLabel_EmptyID.setForeground(Color.LIGHT_GRAY);
 	}
 

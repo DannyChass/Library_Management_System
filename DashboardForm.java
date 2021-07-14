@@ -145,7 +145,7 @@ public class DashboardForm extends JFrame {
 		JLabel lblNewLabel_5 = new JLabel("Books");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_5.setForeground(Color.WHITE);
-		lblNewLabel_5.setBounds(10, 116, 207, 25);
+		lblNewLabel_5.setBounds(10, 273, 207, 25);
 		jPanel_Menu.add(lblNewLabel_5);
 
 		JButton btnNewButton = new JButton("Add a new book");
@@ -157,7 +157,7 @@ public class DashboardForm extends JFrame {
 		btnNewButton.setBackground(Color.DARK_GRAY);
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnNewButton.setBounds(0, 153, 113, 23);
+		btnNewButton.setBounds(0, 310, 113, 23);
 		jPanel_Menu.add(btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("Add a new book");
@@ -174,7 +174,7 @@ public class DashboardForm extends JFrame {
 		btnNewButton_1.setContentAreaFilled(false);
 		btnNewButton_1.setBackground(Color.DARK_GRAY);
 		btnNewButton_1.setAlignmentX(0.5f);
-		btnNewButton_1.setBounds(0, 187, 113, 23);
+		btnNewButton_1.setBounds(0, 344, 113, 23);
 		jPanel_Menu.add(btnNewButton_1);
 
 		JButton btnNewButton_1_1 = new JButton("Add a new book");
@@ -186,7 +186,7 @@ public class DashboardForm extends JFrame {
 		btnNewButton_1_1.setContentAreaFilled(false);
 		btnNewButton_1_1.setBackground(Color.DARK_GRAY);
 		btnNewButton_1_1.setAlignmentX(0.5f);
-		btnNewButton_1_1.setBounds(0, 221, 113, 23);
+		btnNewButton_1_1.setBounds(0, 378, 113, 23);
 		jPanel_Menu.add(btnNewButton_1_1);
 
 		JButton btnNewButton_1_1_1 = new JButton("Add a new book");
@@ -202,7 +202,7 @@ public class DashboardForm extends JFrame {
 		btnNewButton_1_1_1.setContentAreaFilled(false);
 		btnNewButton_1_1_1.setBackground(Color.DARK_GRAY);
 		btnNewButton_1_1_1.setAlignmentX(0.5f);
-		btnNewButton_1_1_1.setBounds(0, 255, 113, 23);
+		btnNewButton_1_1_1.setBounds(0, 412, 113, 23);
 		jPanel_Menu.add(btnNewButton_1_1_1);
 
 		Border panelHeader_1_Border = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white);
@@ -276,7 +276,45 @@ public class DashboardForm extends JFrame {
 		buttonsHoverEffect();
 		
 		//diplay the logo
-		func.displayImage(JLabel_Dashboard_Logo.getWidth(),  JLabel_Dashboard_Logo.getHeight(),"/My_Images/book_dash_logo.png", JLabel_Dashboard_Logo);
+		func.displayImage(JLabel_Dashboard_Logo.getWidth(),  JLabel_Dashboard_Logo.getHeight(),null,"/My_Images/book_dash_logo.png", JLabel_Dashboard_Logo);
+		
+		JLabel lblNewLabel_5_1 = new JLabel("Genre");
+		lblNewLabel_5_1.setForeground(Color.WHITE);
+		lblNewLabel_5_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_5_1.setBounds(10, 116, 207, 25);
+		jPanel_Menu.add(lblNewLabel_5_1);
+		
+		JButton btnManageGenre = new JButton("Manage Genres");
+		btnManageGenre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnManageGenre.setForeground(Color.WHITE);
+		btnManageGenre.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnManageGenre.setFocusable(false);
+		btnManageGenre.setContentAreaFilled(false);
+		btnManageGenre.setBorderPainted(false);
+		btnManageGenre.setBackground(Color.DARK_GRAY);
+		btnManageGenre.setAlignmentX(0.5f);
+		btnManageGenre.setBounds(0, 153, 113, 23);
+		jPanel_Menu.add(btnManageGenre);
+		
+		JLabel lblNewLabel_5_1_1 = new JLabel("Authors");
+		lblNewLabel_5_1_1.setForeground(Color.WHITE);
+		lblNewLabel_5_1_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_5_1_1.setBounds(10, 187, 207, 25);
+		jPanel_Menu.add(lblNewLabel_5_1_1);
+		
+		JButton btnManageGenre_1 = new JButton("Manage Genres");
+		btnManageGenre_1.setForeground(Color.WHITE);
+		btnManageGenre_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnManageGenre_1.setFocusable(false);
+		btnManageGenre_1.setContentAreaFilled(false);
+		btnManageGenre_1.setBorderPainted(false);
+		btnManageGenre_1.setBackground(Color.DARK_GRAY);
+		btnManageGenre_1.setAlignmentX(0.5f);
+		btnManageGenre_1.setBounds(0, 224, 113, 23);
+		jPanel_Menu.add(btnManageGenre_1);
 
 	}
 

@@ -57,7 +57,9 @@ public class EditMemberForm extends JFrame {
 	private JTextField jTextField_PhoneNumber;
 	private JTextField jTextField_Email;
 	private JComboBox jComboBox_Gender = new JComboBox();
+	JLabel jLabel_Image = new JLabel("");
 	JLabel jLabel_EmptyPhone = new JLabel("* enter the phone number");
+	JLabel jLabel_ImagePath = new JLabel("Choose picture");
 
 	// create a member object
 	Member member = new Member();
@@ -65,7 +67,7 @@ public class EditMemberForm extends JFrame {
 	// create a variable to store the profile picture path
 
 	String imagePath = null;
-	private JTextField textField;
+	private JTextField jTextField_Id;
 
 	/**
 	 * Launch the application.
@@ -138,9 +140,15 @@ public class EditMemberForm extends JFrame {
 		// add a gray border to the panel
 		Border panelHeaderBorder = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.DARK_GRAY);
 		panel.setBorder(panelHeaderBorder);
-
+		
+		// add botder to the jlabel image
+		Border JLabelImageBorder = BorderFactory.createMatteBorder(1,1,1,1, new Color(1,152,117));
+		jLabel_Image.setBorder(JLabelImageBorder);
+		
+		//display image in the top
+		
 		Func_Class func = new Func_Class();
-		func.displayImage(90, 60, "/My_Images/members.png", jLabel_FromTitle);
+		func.displayImage(90, 60,null, "/My_Images/members.png", jLabel_FromTitle);
 
 		JLabel jLabel_FirstName = new JLabel("First Name:");
 		jLabel_FirstName.setFont(new Font("Verdana", Font.PLAIN, 14));
@@ -152,13 +160,21 @@ public class EditMemberForm extends JFrame {
 		panel.add(jTextField_FirstName);
 		jTextField_FirstName.setColumns(10);
 
-		JButton jButton_Add = new JButton("Add New Member");
-		jButton_Add.setBounds(10, 562, 434, 27);
-		panel.add(jButton_Add);
-		jButton_Add.addActionListener(new ActionListener() {
+		JButton jButton_Edit = new JButton("Edit Member Info");
+		jButton_Edit.setBounds(10, 562, 434, 27);
+		panel.add(jButton_Edit);
+		jButton_Edit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				//edit the selected member
 
-				// add a new genre
+				// hide the jLabel "empty name message"
+				
+				jLabel_EmptyFirstName.setVisible(false);
+				jLabel_EmptyLastName.setVisible(false);
+				jLabel_EmptyPhone.setVisible(false);
+				
+				//get member data
 				String fname = jTextField_FirstName.getText();
 				String lname = jTextField_LastName.getText();
 				String phone = jTextField_PhoneNumber.getText();
@@ -183,9 +199,10 @@ public class EditMemberForm extends JFrame {
 					if (imagePath != null) {
 
 						try {
+							Integer id = Integer.parseInt(jTextField_Id.getText());
 							Path path = Paths.get(imagePath);
 							img = Files.readAllBytes(path);
-							member.addMember(fname, lname, phone, email, gender, img);
+							member.editMember(id,fname, lname, phone, email, gender, img);
 
 						} catch (IOException e1) {
 							e1.printStackTrace();
@@ -286,7 +303,7 @@ public class EditMemberForm extends JFrame {
 
 		JLabel jLabel_Expertise_1_1_1 = new JLabel("Profile Picture:");
 		jLabel_Expertise_1_1_1.setFont(new Font("Verdana", Font.PLAIN, 14));
-		jLabel_Expertise_1_1_1.setBounds(18, 457, 380, 27);
+		jLabel_Expertise_1_1_1.setBounds(18, 457, 105, 27);
 		panel.add(jLabel_Expertise_1_1_1);
 
 		JButton jButton_SelectProfilePicture = new JButton("Select profile");
@@ -305,15 +322,16 @@ public class EditMemberForm extends JFrame {
 				if (fileState == JFileChooser.APPROVE_OPTION) {
 
 					String path = fileChooser.getSelectedFile().getAbsolutePath();
-
-					
+					jLabel_ImagePath.setText(path);
 
 					imagePath = path;
+					
+					func.displayImage(125, 80, null, path, jLabel_Image);
 				}
 			}
 		});
 
-		jButton_SelectProfilePicture.setBounds(317, 480, 112, 23);
+		jButton_SelectProfilePicture.setBounds(317, 461, 112, 23);
 		panel.add(jButton_SelectProfilePicture);
 		
 		JLabel jLabel_FirstName_1 = new JLabel("Enter Member ID:");
@@ -321,21 +339,62 @@ public class EditMemberForm extends JFrame {
 		jLabel_FirstName_1.setBounds(18, 92, 130, 27);
 		panel.add(jLabel_FirstName_1);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(144, 94, 124, 27);
-		panel.add(textField);
+		jTextField_Id = new JTextField();
+		jTextField_Id.setColumns(10);
+		jTextField_Id.setBounds(144, 94, 124, 27);
+		panel.add(jTextField_Id);
 		
 		JButton jButton_SelectProfilePicture_1 = new JButton("Search");
+		jButton_SelectProfilePicture_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				try {
+
+					// search member by id and display data
+					Integer id = Integer.parseInt(jTextField_Id.getText());
+					Member SelectedMember = member.getMemberById(id);
+					
+					if (SelectedMember != null)
+					{
+						jTextField_Id.setText(String.valueOf(SelectedMember.getId()));
+						jTextField_FirstName.setText(SelectedMember.getFirstName());
+						jTextField_LastName.setText(SelectedMember.getLastName());
+						jTextField_PhoneNumber.setText(SelectedMember.getPhone());
+						jTextField_Email.setText(SelectedMember.getEmail());
+						jComboBox_Gender.setSelectedItem(SelectedMember.getGender());
+						
+						//display the member immage
+						byte[] image = SelectedMember.getPicture();
+						// we will display the image using the imagebyte
+						// so we will mae the image path empty
+						func.displayImage(180, 84, image,"", jLabel_Image);
+						
+					}else {
+						JOptionPane.showMessageDialog(null, "No Member Whith This Id Is Found","Invalid Id",3);
+					}
+					
+				}
+				catch(Exception ex)
+				{
+					JOptionPane.showMessageDialog(null, "Enter a Valid Member Id", "Invalid Id",3);
+				}	
+			}
+		});
 		jButton_SelectProfilePicture_1.setBounds(278, 96, 112, 23);
 		panel.add(jButton_SelectProfilePicture_1);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setOpaque(true);
-		lblNewLabel.setForeground(Color.BLACK);
-		lblNewLabel.setBackground(new Color(144, 238, 144));
-		lblNewLabel.setBounds(122, 465, 185, 86);
-		panel.add(lblNewLabel);
+		
+		jLabel_Image.setOpaque(true);
+		jLabel_Image.setForeground(Color.BLACK);
+		jLabel_Image.setBackground(new Color(144, 238, 144));
+		jLabel_Image.setBounds(122, 467, 180, 89);
+		panel.add(jLabel_Image);
+		
+		
+		jLabel_ImagePath.setForeground(new Color(30, 144, 255));
+		jLabel_ImagePath.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+		jLabel_ImagePath.setBounds(317, 495, 127, 14);
+		panel.add(jLabel_ImagePath);
 
 		jLabel_EmptyFirstName.setVisible(false);
 		jLabel_EmptyLastName.setVisible(false);

@@ -126,7 +126,7 @@ public class ManageAuthorsForm extends JFrame {
 		panel.setBorder(panelHeaderBorder);
 		
 		Func_Class func = new Func_Class();
-		func.displayImage(75,60, "/My_Images/notepad.png",jLabel_FromTitle);
+		func.displayImage(75,60, null,"/My_Images/notepad.png",jLabel_FromTitle);
 		
 		JLabel jLabel_ID = new JLabel("ID:");
 		jLabel_ID.setHorizontalAlignment(SwingConstants.RIGHT);

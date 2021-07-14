@@ -2,7 +2,6 @@ package My_Classes;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.sql.DataSource;
@@ -36,7 +35,7 @@ public class DB {
 		try {
 			connection = datasource.getConnection();
 		} catch (SQLException ex) {
-			Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+			
 			ex.printStackTrace();
 		}
 		return connection;

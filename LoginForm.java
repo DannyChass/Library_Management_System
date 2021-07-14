@@ -43,7 +43,7 @@ public class LoginForm extends JFrame {
 	private JLabel JLabel_Logo;
 
 	Func_Class func = new Func_Class();
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -165,19 +165,19 @@ public class LoginForm extends JFrame {
 
 						// if the user exists
 						if (rs.next()) {
-							
-							DashboardForm dash_f= new DashboardForm();
+
+							DashboardForm dash_f = new DashboardForm();
 							dash_f.setVisible(true);
 							dispose();
 
-							//close the login form
+							// close the login form
 							// if not
 						} else {
-							
+
 							JOptionPane.showMessageDialog(null, "Invalid Username Or Password", "Wrong Data", 0);
-							
+
 						}
-						
+
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -191,8 +191,8 @@ public class LoginForm extends JFrame {
 		// center the position
 		this.setLocationRelativeTo(null);
 
-		
-		func.displayImage(JLabel_Logo.getWidth(), JLabel_Logo.getHeight(),"/My_Images/book_login_logo.png",JLabel_Logo);
+		func.displayImage(JLabel_Logo.getWidth(), JLabel_Logo.getHeight(), null, "/My_Images/book_login_logo.png",
+				JLabel_Logo);
 
 	}
 

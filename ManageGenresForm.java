@@ -121,7 +121,7 @@ public class ManageGenresForm extends JFrame {
 		panel.setBorder(panelHeaderBorder);
 		
 		Func_Class func = new Func_Class();
-		func.displayImage(75,60, "/My_Images/hierarchy.png",jLabel_FromTitle);
+		func.displayImage(75,60, null,"/My_Images/hierarchy.png",jLabel_FromTitle);
 		
 		JLabel lblNewLabel = new JLabel("ID:");
 		lblNewLabel.setFont(new Font("Verdana", Font.PLAIN, 18));

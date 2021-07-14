@@ -4,7 +4,6 @@ import java.awt.Image;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
@@ -66,7 +65,6 @@ public class Func_Class {
 			rs = ps.executeQuery();
 
 		} catch (SQLException ex) {
-			Logger.getLogger(Func_Class.class.getName()).log(Level.SEVERE, null, ex);
 	
 		}
 		return rs;
