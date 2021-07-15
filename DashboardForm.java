@@ -142,68 +142,87 @@ public class DashboardForm extends JFrame {
 		Border panelHeaderBorder = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white);
 		jPanel_Header.setBorder(panelHeaderBorder);
 
-		JLabel lblNewLabel_5 = new JLabel("Books");
+		JLabel lblNewLabel_5 = new JLabel("Members");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_5.setForeground(Color.WHITE);
-		lblNewLabel_5.setBounds(10, 273, 207, 25);
+		lblNewLabel_5.setBounds(0, 258, 207, 25);
 		jPanel_Menu.add(lblNewLabel_5);
 
-		JButton btnNewButton = new JButton("Add a new book");
-		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setBorderPainted(false);
-		btnNewButton.setContentAreaFilled(false);
-		btnNewButton.setFocusable(false);
-		btnNewButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		btnNewButton.setBackground(Color.DARK_GRAY);
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnNewButton.setBounds(0, 310, 113, 23);
-		jPanel_Menu.add(btnNewButton);
-
-		JButton btnNewButton_1 = new JButton("Add a new book");
-		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton_1.setBorderPainted(false);
-		btnNewButton_1.setBorder(UIManager.getBorder("Button.border"));
-		btnNewButton_1.setFocusable(false);
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton jButton_Add_Member = new JButton("Add Member");
+		jButton_Add_Member.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AddMemberForm addMemberF = new AddMemberForm();
+				addMemberF.setVisible(true);
 			}
 		});
-		btnNewButton_1.setForeground(Color.WHITE);
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnNewButton_1.setContentAreaFilled(false);
-		btnNewButton_1.setBackground(Color.DARK_GRAY);
-		btnNewButton_1.setAlignmentX(0.5f);
-		btnNewButton_1.setBounds(0, 344, 113, 23);
-		jPanel_Menu.add(btnNewButton_1);
+		jButton_Add_Member.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		jButton_Add_Member.setBorderPainted(false);
+		jButton_Add_Member.setContentAreaFilled(false);
+		jButton_Add_Member.setFocusable(false);
+		jButton_Add_Member.setAlignmentX(Component.CENTER_ALIGNMENT);
+		jButton_Add_Member.setBackground(Color.DARK_GRAY);
+		jButton_Add_Member.setForeground(Color.WHITE);
+		jButton_Add_Member.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		jButton_Add_Member.setBounds(0, 294, 113, 23);
+		jPanel_Menu.add(jButton_Add_Member);
 
-		JButton btnNewButton_1_1 = new JButton("Add a new book");
-		btnNewButton_1_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton_1_1.setBorderPainted(false);
-		btnNewButton_1_1.setFocusable(false);
-		btnNewButton_1_1.setForeground(Color.WHITE);
-		btnNewButton_1_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnNewButton_1_1.setContentAreaFilled(false);
-		btnNewButton_1_1.setBackground(Color.DARK_GRAY);
-		btnNewButton_1_1.setAlignmentX(0.5f);
-		btnNewButton_1_1.setBounds(0, 378, 113, 23);
-		jPanel_Menu.add(btnNewButton_1_1);
-
-		JButton btnNewButton_1_1_1 = new JButton("Add a new book");
-		btnNewButton_1_1_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton_1_1_1.setBorderPainted(false);
-		btnNewButton_1_1_1.addActionListener(new ActionListener() {
+		JButton jButton_Edit_Member = new JButton("Edit Member");
+		jButton_Edit_Member.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		jButton_Edit_Member.setBorderPainted(false);
+		jButton_Edit_Member.setBorder(UIManager.getBorder("Button.border"));
+		jButton_Edit_Member.setFocusable(false);
+		jButton_Edit_Member.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				EditMemberForm editMemberF = new EditMemberForm();
+				editMemberF.setVisible(true);
 			}
 		});
-		btnNewButton_1_1_1.setFocusable(false);
-		btnNewButton_1_1_1.setForeground(Color.WHITE);
-		btnNewButton_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnNewButton_1_1_1.setContentAreaFilled(false);
-		btnNewButton_1_1_1.setBackground(Color.DARK_GRAY);
-		btnNewButton_1_1_1.setAlignmentX(0.5f);
-		btnNewButton_1_1_1.setBounds(0, 412, 113, 23);
-		jPanel_Menu.add(btnNewButton_1_1_1);
+		jButton_Edit_Member.setForeground(Color.WHITE);
+		jButton_Edit_Member.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		jButton_Edit_Member.setContentAreaFilled(false);
+		jButton_Edit_Member.setBackground(Color.DARK_GRAY);
+		jButton_Edit_Member.setAlignmentX(0.5f);
+		jButton_Edit_Member.setBounds(0, 319, 113, 23);
+		jPanel_Menu.add(jButton_Edit_Member);
+
+		JButton jButton_Delete_Member = new JButton("Delete Member");
+		jButton_Delete_Member.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//show the DeleteMember Form
+				DeleteMemberForm deleteMemberF = new DeleteMemberForm();
+				deleteMemberF.setVisible(true);
+			}
+		});
+		jButton_Delete_Member.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		jButton_Delete_Member.setBorderPainted(false);
+		jButton_Delete_Member.setFocusable(false);
+		jButton_Delete_Member.setForeground(Color.WHITE);
+		jButton_Delete_Member.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		jButton_Delete_Member.setContentAreaFilled(false);
+		jButton_Delete_Member.setBackground(Color.DARK_GRAY);
+		jButton_Delete_Member.setAlignmentX(0.5f);
+		jButton_Delete_Member.setBounds(0, 344, 113, 23);
+		jPanel_Menu.add(jButton_Delete_Member);
+
+		JButton jButton_Members_List = new JButton("Members List");
+		jButton_Members_List.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		jButton_Members_List.setBorderPainted(false);
+		jButton_Members_List.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//show the member list form
+				MemberListForm membersListF = new MemberListForm();
+				membersListF.setVisible(true);
+						
+			}
+		});
+		jButton_Members_List.setFocusable(false);
+		jButton_Members_List.setForeground(Color.WHITE);
+		jButton_Members_List.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		jButton_Members_List.setContentAreaFilled(false);
+		jButton_Members_List.setBackground(Color.DARK_GRAY);
+		jButton_Members_List.setAlignmentX(0.5f);
+		jButton_Members_List.setBounds(0, 369, 113, 23);
+		jPanel_Menu.add(jButton_Members_List);
 
 		Border panelHeader_1_Border = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white);
 		JPanel_1_Header.setBorder(panelHeader_1_Border);
@@ -272,8 +291,6 @@ public class DashboardForm extends JFrame {
 		lblNewLabel_4_2.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		lblNewLabel_4_2.setBounds(0, 44, 650, 95);
 		JPanel_1_1.add(lblNewLabel_4_2);
-
-		buttonsHoverEffect();
 		
 		//diplay the logo
 		func.displayImage(JLabel_Dashboard_Logo.getWidth(),  JLabel_Dashboard_Logo.getHeight(),null,"/My_Images/book_dash_logo.png", JLabel_Dashboard_Logo);
@@ -284,20 +301,24 @@ public class DashboardForm extends JFrame {
 		lblNewLabel_5_1.setBounds(10, 116, 207, 25);
 		jPanel_Menu.add(lblNewLabel_5_1);
 		
-		JButton btnManageGenre = new JButton("Manage Genres");
-		btnManageGenre.addActionListener(new ActionListener() {
+		JButton jButton_Manage_Genres = new JButton("Manage Genres");
+		jButton_Manage_Genres.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		jButton_Manage_Genres.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//show the Manage_Genres form
+				ManageGenresForm mngGenresF = new ManageGenresForm();
+				mngGenresF.setVisible(true);
 			}
 		});
-		btnManageGenre.setForeground(Color.WHITE);
-		btnManageGenre.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnManageGenre.setFocusable(false);
-		btnManageGenre.setContentAreaFilled(false);
-		btnManageGenre.setBorderPainted(false);
-		btnManageGenre.setBackground(Color.DARK_GRAY);
-		btnManageGenre.setAlignmentX(0.5f);
-		btnManageGenre.setBounds(0, 153, 113, 23);
-		jPanel_Menu.add(btnManageGenre);
+		jButton_Manage_Genres.setForeground(Color.WHITE);
+		jButton_Manage_Genres.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		jButton_Manage_Genres.setFocusable(false);
+		jButton_Manage_Genres.setContentAreaFilled(false);
+		jButton_Manage_Genres.setBorderPainted(false);
+		jButton_Manage_Genres.setBackground(Color.DARK_GRAY);
+		jButton_Manage_Genres.setAlignmentX(0.5f);
+		jButton_Manage_Genres.setBounds(0, 153, 113, 23);
+		jPanel_Menu.add(jButton_Manage_Genres);
 		
 		JLabel lblNewLabel_5_1_1 = new JLabel("Authors");
 		lblNewLabel_5_1_1.setForeground(Color.WHITE);
@@ -305,16 +326,25 @@ public class DashboardForm extends JFrame {
 		lblNewLabel_5_1_1.setBounds(10, 187, 207, 25);
 		jPanel_Menu.add(lblNewLabel_5_1_1);
 		
-		JButton btnManageGenre_1 = new JButton("Manage Genres");
-		btnManageGenre_1.setForeground(Color.WHITE);
-		btnManageGenre_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnManageGenre_1.setFocusable(false);
-		btnManageGenre_1.setContentAreaFilled(false);
-		btnManageGenre_1.setBorderPainted(false);
-		btnManageGenre_1.setBackground(Color.DARK_GRAY);
-		btnManageGenre_1.setAlignmentX(0.5f);
-		btnManageGenre_1.setBounds(0, 224, 113, 23);
-		jPanel_Menu.add(btnManageGenre_1);
+		JButton jButton_Manage_Authors = new JButton("Manage Authors");
+		jButton_Manage_Authors.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManageAuthorsForm mngAuthorsForm = new ManageAuthorsForm();
+				mngAuthorsForm.setVisible(true);
+			}
+		});
+		jButton_Manage_Authors.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		jButton_Manage_Authors.setForeground(Color.WHITE);
+		jButton_Manage_Authors.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		jButton_Manage_Authors.setFocusable(false);
+		jButton_Manage_Authors.setContentAreaFilled(false);
+		jButton_Manage_Authors.setBorderPainted(false);
+		jButton_Manage_Authors.setBackground(Color.DARK_GRAY);
+		jButton_Manage_Authors.setAlignmentX(0.5f);
+		jButton_Manage_Authors.setBounds(0, 224, 113, 23);
+		jPanel_Menu.add(jButton_Manage_Authors);
+		
+		buttonsHoverEffect();
 
 	}
 

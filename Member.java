@@ -121,11 +121,10 @@ public class Member {
 			byte[] pic) {
 
 		String editQuery = "UPDATE members SET firstname = ?, lastname = ?, phone = ?, email = ?, gender = ?, picture = ? WHERE id = ? ";
-		
-		try 
-		{
+
+		try {
 			PreparedStatement ps = DB.getConnection().prepareStatement(editQuery);
-			
+
 			ps.setString(1, fname);
 			ps.setString(2, lname);
 			ps.setString(3, phone);
@@ -133,20 +132,17 @@ public class Member {
 			ps.setString(5, gender);
 			ps.setBytes(6, pic);
 			ps.setInt(7, id);
-			
-			if(ps.executeUpdate()!=0) 
-			{
+
+			if (ps.executeUpdate() != 0) {
 				JOptionPane.showMessageDialog(null, "MemberEdited", "edit member", 1);
-				
-			}else 
-			{
+
+			} else {
 				JOptionPane.showMessageDialog(null, "Member Not Edited", "edit member", 2);
-				
+
 			}
-			
-		}catch(SQLException ex)
-		{
-			
+
+		} catch (SQLException ex) {
+
 		}
 
 	}
@@ -193,5 +189,36 @@ public class Member {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	// function to populate an Arrylist with genres
+	public ArrayList<Member> membersList() {
+
+		ArrayList<Member> mList = new ArrayList<>();
+
+		String selectQuery = "SELECT * FROM members";
+
+		PreparedStatement ps;
+		ResultSet rs;
+
+		try {
+
+			ps = DB.getConnection().prepareStatement(selectQuery);
+			rs = ps.executeQuery();
+
+			Member member;
+
+			while (rs.next()) {
+
+				member = new Member(rs.getInt("id"), rs.getString("firstName"), rs.getString("lastName"),
+						rs.getString("phone"),rs.getString("email"), rs.getString("gender"), rs.getBytes("picture"));
+				mList.add(member);
+			}
+
+		} catch (SQLException ex) {
+
+		}
+
+		return mList;
 	}
 }
