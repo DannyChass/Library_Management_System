@@ -1,6 +1,6 @@
 package My_Forms;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.BorderFactory;
@@ -8,54 +8,35 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import My_Classes.Member;
-import My_Classes.DB;
 import My_Classes.Func_Class;
 
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import java.awt.Component;
-import java.awt.Rectangle;
 import java.awt.Cursor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.ListSelectionModel;
-import javax.swing.JTextArea;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JProgressBar;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MemberListForm extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField jTextField_Search;
-	private JLabel jLabel_EmptyLastName = new JLabel("* enter the last name");
 
 	// create a member object
 	Member member = new Member();
+	
+	Func_Class func = new Func_Class();
 
 	// create a variable to store the profile picture path
 
@@ -152,12 +133,26 @@ public class MemberListForm extends JFrame {
 		panel.add(jTable_Members);
 		
 		JButton btnNewButton = new JButton("search");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//search and display data in the jtable
+				String value = jTextField_Search.getText();
+				String query = "SELECT * FROM members WHERE firstname LIKE %"+value+"% or lastName LIKE %"+value+"%";
+				populateJtableWithMembers(query);
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnNewButton.setBounds(516, 106, 184, 23);
 		panel.add(btnNewButton);
 		
+		//display image in the top
+		func.displayImage(90, 60,null, "/My_Images/members.png", jLabel_FromTitle);
+		
 		//center the form
 		this.setLocationRelativeTo(null);
+		
+		
+		populateJtableWithMembers("");
 		
 		
 		
@@ -166,4 +161,38 @@ public class MemberListForm extends JFrame {
 	public void setTextInTheFields(String id, String name) {
 		jTextField_Search.setText(name);
 	}
+	
+	
+	//create a function to populate the jtable with authors
+		public void populateJtableWithMembers(String query){
+			
+			ArrayList<Member> membersList = member.membersList(query);
+			
+			//jTables columns
+			
+			String[] colNames = {"ID","F-Name","L-Name","Phone","Email","Gender"};
+			
+			// row
+			Object [][] rows = new Object[membersList.size()][colNames.length];
+			
+			for(int i = 0; i<membersList.size(); i++) {
+				
+				rows[i][0]= membersList.get(i).getId();
+				
+				rows[i][1]= membersList.get(i).getFirstName();
+				
+				rows[i][2]= membersList.get(i).getLastName();
+				
+				rows[i][3] = membersList.get(i).getPhone();
+				
+				rows[i][4] = membersList.get(i).getEmail();
+				
+				rows[i][5] = membersList.get(i).getGender();
+				
+			}
+			
+			DefaultTableModel model = new DefaultTableModel(rows,colNames);
+			jTable_Members.setModel(model);
+			
+		}
 }
